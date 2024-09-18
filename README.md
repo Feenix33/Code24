@@ -4,3 +4,9 @@ Personal projects created in 2024
 | ------- | ----------- | ----------- |
 | 01.Mitosis | p5js | Mitosis simulation with vehicle movement | 
 | 02.CellEat | p5js | Mitosis cells eat each other |
+| 03.ColorGen | p5js | Trying out third-party palette generators |
+| 04.BubbleSort | p5js | Playing w/sorting algo and interactive bubble sort |
+| 05.Flowers | p5js | GenArt of some flowers |
+| 06.CirclePack | p5js | Pack some circles |
+| 07.FlowerPack | p5js | Pack some flowers (05+06) |
+
