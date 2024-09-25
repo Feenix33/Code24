@@ -9,4 +9,7 @@ Personal projects created in 2024
 | 05.Flowers | p5js | GenArt of some flowers |
 | 06.CirclePack | p5js | Pack some circles |
 | 07.FlowerPack | p5js | Pack some flowers (05+06) |
+| 08.pygFlower | pygame | Draw some pygame flowers see 05 |
+| 09.pygCircPack | pygame | Circle packing in pygame see 06 |
+| 10.pygFlowerPack | pygame | Pack some flowers see 07 |
 
