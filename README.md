@@ -12,4 +12,6 @@ Personal projects created in 2024
 | 08.pygFlower | pygame | Draw some pygame flowers see 05 |
 | 09.pygCircPack | pygame | Circle packing in pygame see 06 |
 | 10.pygFlowerPack | pygame | Pack some flowers see 07 |
+| 11.pygAlphaBalls | pygame | Demo of alpha colors in pygame |
+| 12.TravelSales | p5js | An implementation traveling salesman |
 
