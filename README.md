@@ -14,4 +14,13 @@ Personal projects created in 2024
 | 10.pygFlowerPack | pygame | Pack some flowers see 07 |
 | 11.pygAlphaBalls | pygame | Demo of alpha colors in pygame |
 | 12.TravelSales | p5js | An implementation traveling salesman |
+| 13.Dijkstra | py p5js | An implementation Dijkstra's algo |
+| 14.LineRider | p5js | Draw some cities and roads, rider moves between them |
+| 15.DepthFirst | p5js | Implementation of breath first and depth first, graphs |
+| 16.Dijkstra | p5js | My implementation Dijkstra's algo |
+| 17.GridsGraphs | p5js | Trying some things out from Grids and Graphs Red Blob Games
+| 18.Frank | js | Following Udemy Class from Frank Dvorak |
+| 19.GridsGraphsB | p5js | Repeat 17.GridsGraphs with 1D array for the 2D layout |
+| 20.DijkstraWt | p5js | Dijkstra's algo with weights and 19 structure |
+| 21.AStar | p5js | Attempt to implement A* |
 
