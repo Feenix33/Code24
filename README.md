@@ -23,4 +23,5 @@ Personal projects created in 2024
 | 19.GridsGraphsB | p5js | Repeat 17.GridsGraphs with 1D array for the 2D layout |
 | 20.DijkstraWt | p5js | Dijkstra's algo with weights and 19 structure |
 | 21.AStar | p5js | Attempt to implement A* |
+| 22.GridWorld | p5js | Different structure for grid based worlds |
 
