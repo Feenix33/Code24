@@ -24,4 +24,5 @@ Personal projects created in 2024
 | 20.DijkstraWt | p5js | Dijkstra's algo with weights and 19 structure |
 | 21.AStar | p5js | Attempt to implement A* |
 | 22.GridWorld | p5js | Different structure for grid based worlds |
+| 23.GridA | p5js | More grid world experiments |
 
