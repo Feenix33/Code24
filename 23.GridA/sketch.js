@@ -16,6 +16,7 @@ const DIM =  100;
 let COLS, ROWS;
 let gGraph;
 let gMover;
+let gSpawn;
 
 
 /***** ***** ***** ***** ***** ***** ***** ***** ***** *****/
@@ -45,6 +46,7 @@ class Mover {
     this.y = graph.getNode(atNode).y;
     this.tgtx = null;
     this.tgty = null;
+    this.path = [];
   }
   setPathToRandom() {
     var a = this.atNode;
@@ -119,6 +121,46 @@ class Mover {
     triangle(-this.dim,this.dim, this.dim,this.dim, 0,-this.dim);
     //circle(0,0,4);
     pop();
+  }
+}
+
+
+class Brain extends Mover {
+  constructor (name, graph, atNode) {
+    super (name, graph, atNode);
+    this.clr = 'green';
+    this.clr2 = 'yellow'
+    super.setPathToRandom();
+    super.setNextPathNode();
+  }
+  show() {
+    //const node = this.graph.getNode(this.atNode);
+    push();
+    translate(this.x, this.y);
+    switch (this.dir) {
+      case 6: rotate(PI/2); break;
+      case 2: rotate(PI  ); break;
+      case 4: rotate(-PI/2); break;
+    }
+    noStroke();
+    fill(this.clr);
+    triangle(-this.dim,this.dim, this.dim,this.dim, 0,-this.dim);
+    fill(this.clr2);
+    circle(0,0,4);
+    pop();
+  }
+  update() {
+    super.update();
+    if (super.isAtTarget()) {
+      this.atNode = gGraph.findNodeAt(this.x, this.y); 
+      if (this.path.length == 0) {
+        super.setPathToRandom();
+        super.setNextPathNode();
+      }
+      else {
+        super.setNextPathNode();
+      }
+    }
   }
 }
 
@@ -317,6 +359,7 @@ function init_simulation() {
   //init_simulation_simple();
   init_hardcode();
   gMover = new Mover ("alp", gGraph, 0);
+  gSpawn = new Brain ("beta", gGraph, 7);
 }
 
 function init_hardcode() {
@@ -450,5 +493,7 @@ function draw() {
   if (gMover.isAtTarget()) {
     gMover.setNextPathNode();
   }
+  gSpawn.show();
+  gSpawn.update();
   //noLoop();
 }
