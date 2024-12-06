@@ -13,10 +13,11 @@
 /***** ***** ***** ***** ***** ***** ***** ***** ***** *****/
 
 const DIM =  100;
+const CARS =  3;
 let COLS, ROWS;
 let gGraph;
 let gMover;
-let gSpawn;
+let Cars;
 
 
 /***** ***** ***** ***** ***** ***** ***** ***** ***** *****/
@@ -47,6 +48,9 @@ class Mover {
     this.tgtx = null;
     this.tgty = null;
     this.path = [];
+  }
+  pathEnd() {
+    return this.path[this.path.length-1];
   }
   setPathToRandom() {
     var a = this.atNode;
@@ -199,15 +203,35 @@ class Node {
 class City extends Node {
   constructor (n, x,y) {
     super (n, x, y);
+    this.cars = null;
+  }
+  trackCars(cars) {
+    this.cars = cars;
   }
   show() {
-    push();
-    translate (this.x, this.y);
-    stroke('grey');
-    strokeWeight(3);
-    fill('grey');
-    circle(0, 0, DIM);
-    pop();
+    super.show();
+    if (this.cars) {
+      for (var car of this.cars) { 
+        if (abs(car.x - this.x) < (DIM/2) && abs(car.y - this.y) < (DIM/2)) {
+          push();
+          translate (this.x, this.y);
+          stroke(car.clr);
+          strokeWeight(5);
+          noFill();
+          circle(0, 0, DIM);
+          pop();
+        }
+        else if (this.name == car.pathEnd()) {
+          push();
+          translate (this.x, this.y);
+          stroke(car.clr);
+          strokeWeight(8);
+          noFill();
+          circle(0, 0, DIM);
+          pop();
+        }
+      }
+    }
   }
 }
 
@@ -357,9 +381,17 @@ function init_simulation() {
   gGraph = new Graph(ROWS*COLS);
   init_simulation_grid();
   //init_simulation_simple();
-  init_hardcode();
-  gMover = new Mover ("alp", gGraph, 0);
-  gSpawn = new Brain ("beta", gGraph, 7);
+  //init_hardcode();
+  //gMover = new Mover ("alp", gGraph, 0);
+  Cars = []
+  for (var c=0; c < CARS; c++) {
+    var str = "Car " + String(c);
+    Cars.push(new Brain (str, gGraph, floor(random(0,gGraph.dim))));
+    Cars[c].clr = cmeRandomColor ();
+  }
+  for (var city of gGraph.nodes) {
+    city.trackCars(Cars);
+  }
 }
 
 function init_hardcode() {
@@ -392,7 +424,7 @@ function init_simulation_grid() {
   var n = 0;
   for (var y=0; y < ROWS; y++) {
     for (var x=0; x < COLS; x++) {
-      gGraph.addNode(new Node(n, (x*DIM)+(DIM/2), (y*DIM)+DIM/2));
+      gGraph.addNode(new City(n, (x*DIM)+(DIM/2), (y*DIM)+DIM/2));
       n++;
     }
   }
@@ -439,14 +471,14 @@ function init_simulation_full_edge() {
 //KEY KK
 function keyPressed() { 
   if (key === 'R') init_simulation();
-  else if (key === 's') { 
-    gMover.setPathToTarget(39);
-    gMover.setNextPathNode();
-  }
-  else if (key === 'r') { 
-    gMover.setPathToRandom();
-    gMover.setNextPathNode();
-  }
+  //else if (key === 's') { 
+    //gMover.setPathToTarget(39);
+    //gMover.setNextPathNode();
+  //}
+  //else if (key === 'r') { 
+    //gMover.setPathToRandom();
+    //gMover.setNextPathNode();
+  //}
 
   else if (key === '1') print(gGraph.getNode(1));
   else if (key === 'p') gGraph.debugPrint();
@@ -459,7 +491,7 @@ function keyPressed() {
     while (b == a) b = floor(random(0,gGraph.dim));
     print ("Path from "+ a+ " to "+ b+ " = " + gGraph.path2name(gGraph.bfsPath(a, b)));
   }
-  else if (key === 'm') {for (var j=0; j < 10; j++) {gMover.update()}}
+  //else if (key === 'm') {for (var j=0; j < 10; j++) {gMover.update()}}
   else if (key === 'Shift') ;
   else print ('unhandled key', key);
 
@@ -488,12 +520,14 @@ function setup() {
 function draw() {
   background(200);
   gGraph.show();
-  gMover.show();
-  gMover.update();
-  if (gMover.isAtTarget()) {
-    gMover.setNextPathNode();
+  //gMover.show();
+  //gMover.update();
+  //if (gMover.isAtTarget()) {
+  //  gMover.setNextPathNode();
+  //}
+  for (car of Cars) {
+    car.show();
+    car.update();
   }
-  gSpawn.show();
-  gSpawn.update();
   //noLoop();
 }
